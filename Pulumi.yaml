@@ -1,0 +1,6 @@
+name: gcp_cloudflare_static_web
+runtime:
+  name: python
+  options:
+    virtualenv: venv
+description: This project is used to construct the wholeinfra for the static web
