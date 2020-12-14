@@ -6,7 +6,7 @@ import pulumi_cloudflare as cloudflare
 #SOME KNOWN VAR (You might implement a yml reader to keep this!)
 #
 #COMMON
-DOMAIN_NAME="www.cpht.pro"
+DOMAIN_NAME="[USE-YOUR-DOMAIN-NAME]"
 
 #GCP
 TARGET_PROJECT="[YOUR-PROVISION-PROJECT]"
@@ -23,7 +23,7 @@ FORWARD_TARGET="[YOUR-SERVING-URL] e.g. www.yourdomain.org/$1"
 
 #step 1. create the website bucket
 web_bucket=storage.Bucket("official-web"
-    ,name=DOMAIN_NAME #this variable must be set as your domain name
+    ,name=DOMAIN_NAME #this variable MUST be set as your domain name
     ,website=storage.BucketWebsiteArgs(main_page_suffix=MAIN_SUFFIX,not_found_page=ERR_SUFFIX)
     ,location="us-central1"
     ,project=TARGET_PROJECT
