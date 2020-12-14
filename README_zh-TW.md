@@ -63,43 +63,43 @@
     ``` 
     Previewing update (dev)
 
-View Live: https://app.pulumi.com/augustincl/gcp_cloudflare_static_web/dev/previews/647e7c7c-28f8-4a35-b7ad-7d45996becc8
+    View Live: https://app.pulumi.com/augustincl/gcp_cloudflare_static_web/dev/previews/647e7c7c-28f8-4a35-b7ad-7d45996becc8
 
      Type                                       Name                           Plan       
- +   pulumi:pulumi:Stack                        gcp_cloudflare_static_web-dev  create     
- +   ├─ cloudflare:index:Record                 root                           create     
- +   ├─ cloudflare:index:PageRule               www2root                       create     
- +   ├─ gcp:storage:Bucket                      official-web                   create     
- +   ├─ cloudflare:index:Record                 www-sub                        create     
- +   └─ gcp:storage:DefaultObjectAccessControl  official-web-read              create     
+     +   pulumi:pulumi:Stack                        gcp_cloudflare_static_web-dev  create     
+     +   ├─ cloudflare:index:Record                 root                           create     
+     +   ├─ cloudflare:index:PageRule               www2root                       create     
+     +   ├─ gcp:storage:Bucket                      official-web                   create     
+     +   ├─ cloudflare:index:Record                 www-sub                        create     
+     +   └─ gcp:storage:DefaultObjectAccessControl  official-web-read              create     
  
-Resources:
-    + 6 to create
+    Resources:
+        + 6 to create
 
-Updating (dev)
+    Updating (dev)
 
-View Live: https://app.pulumi.com/augustincl/gcp_cloudflare_static_web/dev/updates/4
+    View Live: https://app.pulumi.com/augustincl/gcp_cloudflare_static_web/dev/updates/4
 
      Type                                       Name                           Status      
- +   pulumi:pulumi:Stack                        gcp_cloudflare_static_web-dev  created     
- +   ├─ gcp:storage:Bucket                      official-web                   created     
- +   ├─ cloudflare:index:Record                 root                           created     
- +   ├─ cloudflare:index:Record                 www-sub                        created     
- +   ├─ cloudflare:index:PageRule               www2root                       created     
- +   └─ gcp:storage:DefaultObjectAccessControl  official-web-read              created     
+     +   pulumi:pulumi:Stack                        gcp_cloudflare_static_web-dev  created     
+     +   ├─ gcp:storage:Bucket                      official-web                   created     
+     +   ├─ cloudflare:index:Record                 root                           created     
+     +   ├─ cloudflare:index:Record                 www-sub                        created     
+     +   ├─ cloudflare:index:PageRule               www2root                       created     
+     +   └─ gcp:storage:DefaultObjectAccessControl  official-web-read              created     
  
-Outputs:
-    bucket_name: "gs://[USE-YOUR-DOMAIN-NAME]"
+    Outputs:
+        bucket_name: "gs://[USE-YOUR-DOMAIN-NAME]"
 
-Resources:
-    + 6 created
+    Resources:
+        + 6 created
 
-Duration: 8s
+    Duration: 8s
     ```
 
 6.  上傳你的預設首頁(index.html)與錯誤頁(404.html)!
     
-    a. 前往 [Google Console](https://console.cloud.google.com/)，並且打開命名為 "[USE-YOUR-DOMAIN-NAME]" 的 bucket。
+    a. 前往 [Google Console](https://console.cloud.google.com/)，並且打開命名為 "[USE-YOUR-DOMAIN-NAME]" 的 bucket。<br/>
     b. 上傳 index.html 與 404.html.
 
 7. 現在你可以透過 [USE-YOUR-DOMAIN-NAME] 來瀏覽你的網站!
