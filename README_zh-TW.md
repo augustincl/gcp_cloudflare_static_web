@@ -1,34 +1,32 @@
-# Leverage Cloudflare and GCP to construct the cheapest infra for Static Web 
+# 使用 Cloudflare 與 GCP 打造零元的靜態網站基礎設施 
 
-This project will use google bucket as the web backend to serving a website.
-As for DNS and CDN, we will leverage Cloudflare as the solution to serve the request
+將採用 Google Bucket 來存放靜態網頁，並且提供給使用者瀏覽。DNS 與 CDN 則採用 Cloudflare 的解決方案，一方面為網站提供穩妥的導流，另一方面也去除了自架的 CDN 與負載均衡器的費用。
 
-:triangular_flag_on_post: TLS with auto-updates by default!
-:bulb: This implementation will leverage two different kinds of the cloud providers to serve the web.
-The purpose here is to lower down the initial cost for the static web. At the very begining and the general purpose, we do need a robust, but a cheap solution for your own web. However, if you have any concerns, please feel free to take them into considerations and just modify them as you expect. 
+:triangular_flag_on_post: 預設使用 Cloudflare 的憑證服務，來自動提供 TLS 保護!<br/><br/>
+
+:bulb: 專案採用了兩個不同的雲端解決方案供應商，來組合整個基礎設施，主要目的是在不減低網站的穩定性下，又能進一步降低維護靜態網站基礎設施的費用。如果你有任何其他考量，完全可以將其加入實作中，當然有什麼建議也可以透過 github 的 issue 交流。
 
 ## Prerequisite
 
-* This project leverages GCP. Please setup your [gcloud SDK](https://cloud.google.com/sdk/docs/install#deb)
-* You should leverage gcloud command to setup your application token
-* Python **3.7+**. :warning: DO NOT USE VERSION 2.x
+* 此專案是基於 Google 的雲端服務，為了完成整個佈署，請安裝 [gcloud SDK](https://cloud.google.com/sdk/docs/install#deb)
+* Python 3.7+ :warning: 請勿安裝2.x的版本
 * [Pulumi](https://www.pulumi.com/docs/get-started/install/)
-* Please prepare your [Cloudflare](https://www.cloudflare.com/) account and generate an API token for the operation.
-* Change your domain name server with the ones provided by cloudflare. [more](https://support.cloudflare.com/hc/en-us/articles/205195708-Changing-your-domain-nameservers-to-Cloudflare)
-* In your moved website from Cloudflare, set your SSL/TLS encryption mode as **FULL**
+* 備妥 [Cloudflare](https://www.cloudflare.com/) 帳號，並且產生用於驗證 API 呼叫的權柄(token)
+* 將你的 DNS 主機改成使用 Cloudflare.[more](https://support.cloudflare.com/hc/en-us/articles/205195708-Changing-your-domain-nameservers-to-Cloudflare)
+* 在 Cloudflare 所託管的目標網站中，將 SSL/TLS 加密模式設置為 **完整**
 
 :mega: 
-1. All the commands are based on **LINUX**
-2. If you are a Windows user, please note that you might need to adjust some instructions!
-3. Please refer to the official site for gcloud and pulumi for more details about the installation
-4. Please leverage Anaconda to setup your python environment.
+1. 本專案所有操作都是基於 **LINUX**。
+2. 如果是 Windows 的使用者，一些操作指令可能不適用! 請稍加調適。
+3. gcloud與pulumi的設置請參考官網，而Python則請用anaconda建立執行環境
+
 
 ## Running the App
 
-1. Download and initialize your environment
+1. 下載並且初始你的環境
 
-    :warning: 
-    For Windows users, please leverage Anaconda to create your virtual environment. Then, use command to install requirements.txt
+    :warning:
+    Windows 使用者請利用 Anaconda 建立虛擬環境，再利用指令安裝 requirements.txt 即可!
 
     ```
     $ python3 -m venv venv
@@ -36,13 +34,13 @@ The purpose here is to lower down the initial cost for the static web. At the ve
     $ pip3 install -r requirements.txt
     ```
     
-2.  Create a new stack:
+2.  建立一個新的堆疊:
 
     ```
     $ pulumi stack init dev
     ```
 
-3.  Configure the project:
+3.  設定專案組態屬性:
 
     ```
     $ pulumi config set gcp:project YOURGOOGLECLOUDPROJECT
@@ -50,7 +48,7 @@ The purpose here is to lower down the initial cost for the static web. At the ve
     $ pulumi set cloudflare:apiKey  I_AM_A_KEY_FOR_CLOUDFLARE --secret
     ```
 
-4.  Edit the following variable in infrabase.py based on your domain
+4.  打開 infrabase.py 檔案，並且將已申請好的域名指派給如下的域名變數
 
     ```
     DOMAIN_NAME="[USE-YOUR-DOMAIN-NAME]" 
@@ -60,7 +58,7 @@ The purpose here is to lower down the initial cost for the static web. At the ve
     FORWARD_TARGET="[YOUR-SERVING-URL] e.g. www.yourdomain.org/$1" DO NOT FORGET $1
     ```
 
-5.  Run `pulumi up -y` to preview and deploy changes:
+5.  執行 `pulumi up -y` 來預覽整個基礎設施的配置，並且進行佈署:
 
     ``` 
     Previewing update (dev)
@@ -99,14 +97,14 @@ Resources:
 Duration: 8s
     ```
 
-6.  Upload your index.html and 404.html
+6.  上傳你的預設首頁(index.html)與錯誤頁(404.html)!
     
-    a. Go to [Google Console](https://console.cloud.google.com/) and open the created bucket, named with "[USE-YOUR-DOMAIN-NAME]".
-    b. upload your html files into it.
+    a. 前往 [Google Console](https://console.cloud.google.com/)，並且打開命名為 "[USE-YOUR-DOMAIN-NAME]" 的 bucket。
+    b. 上傳 index.html 與 404.html.
 
-7. Now, you could find your web from [USE-YOUR-DOMAIN-NAME]!
+7. 現在你可以透過 [USE-YOUR-DOMAIN-NAME] 來瀏覽你的網站!
 
-8. Don't forget to clean up the infrastructure, if you just give it a try.
+8. 如果你只是進行測試，別忘記在測試完畢後，將所有資源刪除!
 
     ```
     $ pulumi destroy
