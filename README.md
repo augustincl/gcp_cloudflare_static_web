@@ -70,7 +70,7 @@ The purpose here is to lower down the initial cost for the static web. At the ve
      Type                                       Name                           Plan       
      +   pulumi:pulumi:Stack                        gcp_cloudflare_static_web-dev  create     
      +   ├─ cloudflare:index:Record                 root                           create     
-     +   ├─ cloudflare:index:PageRule               www2root                       create     
+     +   ├─ cloudflare:index:PageRule               root2www                       create     
      +   ├─ gcp:storage:Bucket                      official-web                   create     
      +   ├─ cloudflare:index:Record                 www-sub                        create     
      +   └─ gcp:storage:DefaultObjectAccessControl  official-web-read              create     
@@ -87,7 +87,7 @@ The purpose here is to lower down the initial cost for the static web. At the ve
      +   ├─ gcp:storage:Bucket                      official-web                   created     
      +   ├─ cloudflare:index:Record                 root                           created     
      +   ├─ cloudflare:index:Record                 www-sub                        created     
-     +   ├─ cloudflare:index:PageRule               www2root                       created     
+     +   ├─ cloudflare:index:PageRule               root2www                       created     
      +   └─ gcp:storage:DefaultObjectAccessControl  official-web-read              created     
  
     Outputs:

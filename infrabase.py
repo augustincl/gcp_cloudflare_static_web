@@ -51,7 +51,7 @@ root=cloudflare.Record("root"
     ,ttl=1)
 
 #step 3. add a page rule
-always_root_rule=cloudflare.PageRule("www2root"
+always_root_rule=cloudflare.PageRule("root2www"
     ,zone_id=ZONE_ID
     ,target=RULE_TARGET
     ,priority=1
